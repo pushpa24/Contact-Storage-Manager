@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<section>
+
+    <div class="card mr-3 ml-3">
+        <div class="card-body" th:if=${contact}>
+
+            <div class="container text-center">
+                <img src="" style="height:200px;width:200px;" class="my_profile_picture" th:src="@{'/img/'+${contact.image}}" alt="profile photo">
+                <h3 class="mt-3"><span  th:text="${contact.name}"></span>(<span th:text="${contact.secondName}"></span>)</h3>
+                <div class="table-responsive">
+                <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col"><span th:text="${contact.cid}"></span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Email</th>
+      <td><span th:text="${contact.email}"></span></td>
+
+    </tr>
+    
+    <tr>
+      <th scope="row">Phone</th>
+      <td><span th:text="${contact.phone}"></span></td>
+
+    </tr>
+    
+     <tr>
+      <th scope="row">Work</th>
+      <td><span th:text="${contact.work}"></span></td>
+
+    </tr>
+  </tbody>
+  
+</table>
+</div>
+
+<div class="description mt-3">
+  <th:block th:utext="${contact.description}"></th:block>
+  
+  </div>
+  
+  <div class="container mt-3">
+   <form method="post" th:action="@{'/user/update-contact/'+${contact.cid}}" class="mt-2">
+                            <button type="submit" class="btn btn-primary btn-sm btn-block">Update</button>
+                            </form>
+   <button th:onclick="|deleteContact(${contact.cid})|"  class="btn btn-danger btn-sm btn-block">Delete</button>
+  </div>
+  
+            </div>
+        </div>
+        
+
+    </div>
+    
+    <h1 class="text-center p-3 bg-danger text-white" th:unless="${contact}">You dont have permission to see this contact.....</h1>
+    
+ 
+</section>
+</body>
+</html>
